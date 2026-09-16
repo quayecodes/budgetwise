@@ -1,0 +1,10 @@
+// Phase 4 foundation only. The detailed Phase 3 design will be implemented
+// through reviewed migrations before application features are added.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
