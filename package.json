@@ -29,7 +29,7 @@
     "eslint-config-next": "latest",
     "prettier": "latest",
     "prettier-plugin-tailwindcss": "latest",
-    "prisma": "^7.10.0",
+    "prisma": "^6.19.3",
     "tailwindcss": "latest",
     "typescript": "latest"
   }
