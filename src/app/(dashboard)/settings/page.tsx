@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { requireUser } from "@/server/auth/session";
+import { DashboardShell } from "@/components/ui/dashboard-shell";
 import { updateProfilePreferencesAction } from "@/server/profile/actions";
 import { supportedCurrencies } from "@/server/profile/validation";
 
@@ -27,15 +26,11 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
   const profile = user.profile ?? { currency: "USD", timezone: "UTC" };
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-2xl px-6 py-8">
-      <header className="border-b border-neutral-200 pb-6">
-        <Link className="text-sm font-medium text-emerald-700" href="/dashboard">
-          BudgetWise
-        </Link>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Profile settings</h1>
-        <p className="mt-2 text-sm text-neutral-600">Choose how amounts and dates are shown in your workspace.</p>
-      </header>
-
+    <DashboardShell
+      title="Profile settings"
+      description="Choose how amounts and dates are shown in your workspace."
+      action={{ href: "/dashboard", label: "Dashboard" }}
+    >
       <section className="py-8">
         {params.error ? (
           <p className="mb-6 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -73,6 +68,6 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
           </button>
         </form>
       </section>
-    </main>
+    </DashboardShell>
   );
 }

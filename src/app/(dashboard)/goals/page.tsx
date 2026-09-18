@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { requireUser } from "@/server/auth/session";
+import { DashboardShell } from "@/components/ui/dashboard-shell";
 import { formatMoney } from "@/lib/format";
 import { addContributionAction, createGoalAction } from "@/server/goals/actions";
 import { getGoals } from "@/server/goals/service";
@@ -18,20 +17,11 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
   const [goals, { error }] = await Promise.all([getGoals(user.id), searchParams]);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8">
-      <header className="flex items-center justify-between border-b border-neutral-200 pb-6">
-        <div>
-          <Link className="text-sm font-medium text-emerald-700" href="/dashboard">
-            BudgetWise
-          </Link>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Savings goals</h1>
-          <p className="mt-2 text-sm text-neutral-600">Turn small contributions into meaningful progress.</p>
-        </div>
-        <Link className="text-sm font-medium text-emerald-700" href="/dashboard">
-          Dashboard
-        </Link>
-      </header>
-
+    <DashboardShell
+      title="Savings goals"
+      description="Turn small contributions into meaningful progress."
+      action={{ href: "/dashboard", label: "Dashboard" }}
+    >
       <section className="grid gap-8 py-8 lg:grid-cols-[20rem_1fr]">
         <div>
           <h2 className="text-xl font-semibold">Create a goal</h2>
@@ -108,6 +98,6 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
           )}
         </div>
       </section>
-    </main>
+    </DashboardShell>
   );
 }

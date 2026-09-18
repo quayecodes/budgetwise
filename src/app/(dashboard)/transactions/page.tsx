@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { requireUser } from "@/server/auth/session";
+import { DashboardShell } from "@/components/ui/dashboard-shell";
 import { formatMoney } from "@/lib/format";
 import { ensureDefaultCategories } from "@/server/transactions/repository";
 import { getTransactionWorkspace } from "@/server/transactions/service";
@@ -32,19 +33,7 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
   ]);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8">
-      <header className="flex items-center justify-between border-b border-neutral-200 pb-6">
-        <div>
-          <Link className="text-sm font-medium text-emerald-700" href="/dashboard">
-            BudgetWise
-          </Link>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Transactions</h1>
-        </div>
-        <Link className="text-sm font-medium text-emerald-700" href="/dashboard">
-          Dashboard
-        </Link>
-      </header>
-
+    <DashboardShell title="Transactions" action={{ href: "/dashboard", label: "Dashboard" }}>
       <section className="grid gap-8 py-8 lg:grid-cols-[20rem_1fr]">
         <div>
           <h2 className="text-xl font-semibold">Add transaction</h2>
@@ -188,6 +177,6 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
           )}
         </div>
       </section>
-    </main>
+    </DashboardShell>
   );
 }

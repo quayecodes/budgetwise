@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { requireUser } from "@/server/auth/session";
+import { DashboardShell } from "@/components/ui/dashboard-shell";
 import { formatMoney } from "@/lib/format";
 import { ensureDefaultCategories, listCategories } from "@/server/transactions/repository";
 import { saveMonthlyBudgetAction } from "@/server/budgets/actions";
@@ -24,22 +23,11 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
   ]);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8">
-      <header className="flex items-center justify-between border-b border-neutral-200 pb-6">
-        <div>
-          <Link className="text-sm font-medium text-emerald-700" href="/dashboard">
-            BudgetWise
-          </Link>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Monthly budgets</h1>
-          <p className="mt-2 text-sm text-neutral-600">
-            Set spending limits for {workspace.startsAt.toLocaleString("en", { month: "long", year: "numeric", timeZone: "UTC" })}.
-          </p>
-        </div>
-        <Link className="text-sm font-medium text-emerald-700" href="/transactions">
-          Transactions
-        </Link>
-      </header>
-
+    <DashboardShell
+      title="Monthly budgets"
+      description={`Set spending limits for ${workspace.startsAt.toLocaleString("en", { month: "long", year: "numeric", timeZone: "UTC" })}.`}
+      action={{ href: "/transactions", label: "Transactions" }}
+    >
       <section className="grid gap-8 py-8 lg:grid-cols-[20rem_1fr]">
         <div>
           <h2 className="text-xl font-semibold">Set a budget</h2>
@@ -109,6 +97,6 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
           )}
         </div>
       </section>
-    </main>
+    </DashboardShell>
   );
 }
