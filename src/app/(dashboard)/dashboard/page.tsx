@@ -41,30 +41,32 @@ export default async function DashboardPage() {
         <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
           Here is your current-month financial overview.
         </p>
-        <Link
-          className="mt-6 inline-block rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
-          href="/transactions"
-        >
-          View transactions
-        </Link>
-        <Link
-          className="ml-3 mt-6 inline-block rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
-          href="/budgets"
-        >
-          Manage budgets
-        </Link>
-        <Link
-          className="ml-3 mt-6 inline-block rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
-          href="/goals"
-        >
-          Savings goals
-        </Link>
-        <Link
-          className="ml-3 mt-6 inline-block rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
-          href="/settings"
-        >
-          Settings
-        </Link>
+        <nav aria-label="Financial tools" className="mt-6 flex flex-wrap gap-3">
+          <Link
+            className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+            href="/transactions"
+          >
+            View transactions
+          </Link>
+          <Link
+            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+            href="/budgets"
+          >
+            Manage budgets
+          </Link>
+          <Link
+            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+            href="/goals"
+          >
+            Savings goals
+          </Link>
+          <Link
+            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+            href="/settings"
+          >
+            Settings
+          </Link>
+        </nav>
       </section>
 
       <section aria-label="Current month summary" className="grid gap-4 sm:grid-cols-3">

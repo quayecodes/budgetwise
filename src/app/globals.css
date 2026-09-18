@@ -30,3 +30,14 @@ select optgroup {
   background-color: #ffffff;
   color: #172033;
 }
+
+:where(a, button, input, select):focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 2px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}

@@ -161,8 +161,8 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
           ) : (
             <div className="mt-6 divide-y divide-neutral-200 border-y border-neutral-200">
               {transactions.map((transaction) => (
-                <article className="flex items-center justify-between gap-4 py-4" key={transaction.id}>
-                  <div>
+                <article className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between" key={transaction.id}>
+                  <div className="min-w-0">
                     <p className="font-medium">{transaction.description || transaction.category.name}</p>
                     <p className="mt-1 text-sm text-neutral-500">
                       {transaction.category.name} · {transaction.occurredAt.toISOString().slice(0, 10)}
@@ -171,7 +171,7 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
                   <p className={transaction.type === "EXPENSE" ? "font-semibold text-red-700" : "font-semibold text-emerald-700"}>
                     {formatAmount(transaction.amountInCents, transaction.type, user.profile?.currency)}
                   </p>
-                  <div className="flex shrink-0 gap-3 text-sm">
+                  <div className="flex shrink-0 items-center gap-3 text-sm">
                     <Link className="font-medium text-emerald-700" href={`/transactions/${transaction.id}/edit`}>
                       Edit
                     </Link>
