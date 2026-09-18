@@ -2,6 +2,7 @@ import { logoutUser } from "@/server/auth/actions";
 import { requireUser } from "@/server/auth/session";
 import { getDashboardSummary } from "@/server/dashboard/service";
 import { formatMoney } from "@/lib/format";
+import { DashboardNav } from "@/components/ui/dashboard-nav";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -35,6 +36,7 @@ export default async function DashboardPage() {
           </button>
         </form>
       </header>
+      <DashboardNav />
 
       <section className="py-8">
         <h2 className="text-xl font-semibold">Hello, {user.name}</h2>

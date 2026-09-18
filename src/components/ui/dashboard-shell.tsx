@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { DashboardNav } from "@/components/ui/dashboard-nav";
+
 type DashboardShellProps = {
   title: string;
   description?: string;
@@ -27,6 +29,7 @@ export function DashboardShell({ title, description, action, children }: Dashboa
           </Link>
         ) : null}
       </header>
+      <DashboardNav />
       {children}
     </main>
   );
