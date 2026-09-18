@@ -1,5 +1,6 @@
 import { logoutUser } from "@/server/auth/actions";
 import { requireUser } from "@/server/auth/session";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -26,9 +27,15 @@ export default async function DashboardPage() {
       <section className="py-8">
         <h2 className="text-xl font-semibold">Hello, {user.name}</h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
-          Your secure account is ready. Transaction tracking, budgets, savings goals, and
-          dashboard summaries will be introduced in the next approved phases.
+          Track your income and expenses securely, then build a clearer picture of your
+          financial habits.
         </p>
+        <Link
+          className="mt-6 inline-block rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+          href="/transactions"
+        >
+          View transactions
+        </Link>
       </section>
     </main>
   );
