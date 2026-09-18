@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const supportedCurrencies = ["USD", "EUR", "GBP", "CAD", "AUD", "NGN"] as const;
+export const supportedCurrencies = ["USD", "EUR", "GBP", "CAD", "AUD", "GHS", "NGN"] as const;
 
 export const profilePreferencesSchema = z.object({
   currency: z.enum(supportedCurrencies),

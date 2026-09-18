@@ -53,7 +53,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
             <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={profile.currency} name="currency">
               {supportedCurrencies.map((currency) => (
                 <option key={currency} value={currency}>
-                  {currency}
+                  {currency === "GHS" ? "GHS - Ghanaian cedi" : currency}
                 </option>
               ))}
             </select>
