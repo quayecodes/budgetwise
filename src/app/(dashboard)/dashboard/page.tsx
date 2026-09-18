@@ -36,6 +36,18 @@ export default async function DashboardPage() {
         >
           View transactions
         </Link>
+        <Link
+          className="ml-3 mt-6 inline-block rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+          href="/budgets"
+        >
+          Manage budgets
+        </Link>
+        <Link
+          className="ml-3 mt-6 inline-block rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+          href="/goals"
+        >
+          Savings goals
+        </Link>
       </section>
     </main>
   );
