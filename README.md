@@ -44,7 +44,8 @@ for managing personal finances.
 | Phase 4: Project Initialization | Completed |
 | Phase 5: Authentication & Authorization | Completed |
 | Phase 6: Core Feature Development | Completed |
-| Phase 7: UI/UX Refinement | In progress |
+| Phase 7: UI/UX Refinement | Completed |
+| Phase 8: Testing, Security & Code Review | Upcoming |
 
 ## Project Structure
 
@@ -101,3 +102,4 @@ npm run build
 - [Phase 4: Project Initialization](docs/phase-4-project-initialization.md)
 - [Phase 5: Authentication and Authorization](docs/phase-5-authentication-and-authorization.md)
 - [Phase 6: Core Application Features](docs/phase-6-core-application-features.md)
+- [Phase 7: UI/UX Refinement](docs/phase-7-ui-ux-refinement.md)

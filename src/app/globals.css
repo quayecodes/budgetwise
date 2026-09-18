@@ -136,6 +136,25 @@ select {
   background: rgba(255, 255, 255, 0.62);
 }
 
+.alert {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.alert-error {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #991b1b;
+}
+
+.alert-success {
+  border: 1px solid #a7f3d0;
+  background: #ecfdf5;
+  color: #065f46;
+}
+
 .surface {
   border: 1px solid var(--line);
   border-radius: 0.75rem;

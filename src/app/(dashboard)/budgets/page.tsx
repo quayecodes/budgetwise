@@ -83,7 +83,7 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
                         {percentage}%
                       </p>
                     </div>
-                    <div className="mt-4 h-2 overflow-hidden rounded-full bg-neutral-200" aria-label={`${percentage}% of ${budget.category.name} budget used`} role="progressbar" aria-valuemax={100} aria-valuemin={0} aria-valuenow={Math.min(percentage, 100)}>
+                    <div className="mt-4 h-2 overflow-hidden rounded-full bg-neutral-200" aria-label={`${percentage}% of ${budget.category.name} budget used${exceeded ? ", over budget" : ""}`} role="progressbar" aria-valuemax={100} aria-valuemin={0} aria-valuenow={Math.min(percentage, 100)}>
                       <div className={exceeded ? "h-full bg-red-600" : "h-full bg-emerald-600"} style={{ width: `${progressWidth}%` }} />
                     </div>
                     <p className={exceeded ? "mt-3 text-sm font-medium text-red-700" : "mt-3 text-sm text-neutral-600"}>

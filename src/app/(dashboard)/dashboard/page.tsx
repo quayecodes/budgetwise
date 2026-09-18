@@ -94,7 +94,7 @@ export default async function DashboardPage() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-semibold">Budget progress</h2>
-              <p className="mt-1 text-sm text-neutral-600">
+              <p className="mt-1 text-sm text-[var(--ink-muted)]">
                 {summary.budget.budgetInCents
                   ? `${formatAmount(summary.budget.spentInCents)} of ${formatAmount(summary.budget.budgetInCents)} used`
                   : "No monthly budgets set yet."}
@@ -109,7 +109,7 @@ export default async function DashboardPage() {
               <div className="mt-4 h-2 overflow-hidden rounded-full bg-neutral-200" aria-label={`${budgetPercentage}% of monthly budgets used`} role="progressbar" aria-valuemax={100} aria-valuemin={0} aria-valuenow={Math.min(budgetPercentage, 100)}>
                 <div className={budgetPercentage > 100 ? "h-full bg-red-600" : "h-full bg-emerald-600"} style={{ width: `${Math.min(budgetPercentage, 100)}%` }} />
               </div>
-              <p className={budgetPercentage > 100 ? "mt-3 text-sm font-medium text-red-700" : "mt-3 text-sm text-neutral-600"}>
+              <p className={budgetPercentage > 100 ? "mt-3 text-sm font-medium text-red-700" : "mt-3 text-sm text-[var(--ink-muted)]"}>
                 {budgetPercentage > 100 ? `${formatAmount(summary.budget.spentInCents - summary.budget.budgetInCents)} over budget` : `${formatAmount(summary.budget.budgetInCents - summary.budget.spentInCents)} remaining`}
               </p>
             </>
@@ -120,7 +120,7 @@ export default async function DashboardPage() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-semibold">Savings goals</h2>
-              <p className="mt-1 text-sm text-neutral-600">
+              <p className="mt-1 text-sm text-[var(--ink-muted)]">
                 {summary.goals.count
                   ? `${formatAmount(summary.goals.currentInCents)} of ${formatAmount(summary.goals.targetInCents)} saved`
                   : "No active savings goals yet."}
@@ -135,7 +135,7 @@ export default async function DashboardPage() {
               <div className="mt-4 h-2 overflow-hidden rounded-full bg-neutral-200" aria-label={`${goalPercentage}% of savings goals complete`} role="progressbar" aria-valuemax={100} aria-valuemin={0} aria-valuenow={Math.min(goalPercentage, 100)}>
                 <div className="h-full bg-emerald-600" style={{ width: `${Math.min(goalPercentage, 100)}%` }} />
               </div>
-              <p className="mt-3 text-sm text-neutral-600">{Math.min(goalPercentage, 100)}% complete across active goals</p>
+              <p className="mt-3 text-sm text-[var(--ink-muted)]">{Math.min(goalPercentage, 100)}% complete across active goals</p>
             </>
           ) : null}
         </article>
