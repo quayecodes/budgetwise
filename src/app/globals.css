@@ -47,6 +47,22 @@ select {
   min-height: 2.75rem;
 }
 
+.form-control {
+  display: block;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background: #ffffff;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  color: #172033;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #047857;
+}
+
 .button-primary,
 .button-secondary,
 .button-danger {

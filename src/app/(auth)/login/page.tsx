@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { loginUser } from "@/server/auth/actions";
+import { AuthShell } from "@/components/ui/auth-shell";
 
 type LoginPageProps = {
   searchParams: Promise<{
@@ -12,13 +13,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const { error } = await searchParams;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center px-6 py-12">
-      <p className="text-sm font-medium text-emerald-700">BudgetWise</p>
-      <h1 className="mt-3 text-3xl font-semibold tracking-tight">Welcome back</h1>
-      <p className="mt-3 text-sm leading-6 text-neutral-600">
-        Sign in to continue managing your student budget.
-      </p>
-
+    <AuthShell title="Welcome back" description="Sign in to continue managing your student budget.">
       {error ? (
         <p className="mt-6 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
           {error}
@@ -29,7 +24,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <label className="block">
           <span className="text-sm font-medium">Email</span>
           <input
-            className="mt-2 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-600"
+            className="form-control mt-2"
             name="email"
             type="email"
             autoComplete="email"
@@ -40,7 +35,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <label className="block">
           <span className="text-sm font-medium">Password</span>
           <input
-            className="mt-2 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-600"
+            className="form-control mt-2"
             name="password"
             type="password"
             autoComplete="current-password"
@@ -50,7 +45,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </label>
 
         <button
-          className="w-full rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
+          className="button-primary w-full"
           type="submit"
         >
           Sign in
@@ -63,6 +58,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           Create an account
         </Link>
       </p>
-    </main>
+    </AuthShell>
   );
 }
