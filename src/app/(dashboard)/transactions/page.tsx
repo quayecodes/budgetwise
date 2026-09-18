@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { requireUser } from "@/server/auth/session";
+import { formatMoney } from "@/lib/format";
 import { ensureDefaultCategories } from "@/server/transactions/repository";
 import { getTransactionWorkspace } from "@/server/transactions/service";
 import { createTransactionAction, deleteTransactionAction } from "@/server/transactions/actions";
@@ -16,9 +17,9 @@ type TransactionsPageProps = {
   }>;
 };
 
-function formatAmount(amountInCents: number, type: string) {
-  const amount = (amountInCents / 100).toFixed(2);
-  return `${type === "EXPENSE" ? "-" : "+"}$${amount}`;
+function formatAmount(amountInCents: number, type: string, currency?: string) {
+  const amount = formatMoney(amountInCents, currency);
+  return `${type === "EXPENSE" ? "-" : "+"}${amount}`;
 }
 
 export default async function TransactionsPage({ searchParams }: TransactionsPageProps) {
@@ -168,7 +169,7 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
                     </p>
                   </div>
                   <p className={transaction.type === "EXPENSE" ? "font-semibold text-red-700" : "font-semibold text-emerald-700"}>
-                    {formatAmount(transaction.amountInCents, transaction.type)}
+                    {formatAmount(transaction.amountInCents, transaction.type, user.profile?.currency)}
                   </p>
                   <div className="flex shrink-0 gap-3 text-sm">
                     <Link className="font-medium text-emerald-700" href={`/transactions/${transaction.id}/edit`}>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { requireUser } from "@/server/auth/session";
+import { formatMoney } from "@/lib/format";
 import { addContributionAction, createGoalAction } from "@/server/goals/actions";
 import { getGoals } from "@/server/goals/service";
 
@@ -8,8 +9,8 @@ type GoalsPageProps = {
   searchParams: Promise<{ error?: string }>;
 };
 
-function formatAmount(amountInCents: number) {
-  return `$${(amountInCents / 100).toFixed(2)}`;
+function formatAmount(amountInCents: number, currency?: string) {
+  return formatMoney(amountInCents, currency);
 }
 
 export default async function GoalsPage({ searchParams }: GoalsPageProps) {
@@ -75,7 +76,7 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
                       <div>
                         <h3 className="font-semibold">{goal.name}</h3>
                         <p className="mt-1 text-sm text-neutral-600">
-                          {formatAmount(goal.currentAmountInCents)} of {formatAmount(goal.targetAmountInCents)}
+                          {formatAmount(goal.currentAmountInCents, user.profile?.currency)} of {formatAmount(goal.targetAmountInCents, user.profile?.currency)}
                           {goal.targetDate ? ` · Due ${goal.targetDate.toISOString().slice(0, 10)}` : ""}
                         </p>
                       </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { requireUser } from "@/server/auth/session";
+import { formatMoney } from "@/lib/format";
 import { ensureDefaultCategories, listCategories } from "@/server/transactions/repository";
 import { saveMonthlyBudgetAction } from "@/server/budgets/actions";
 import { getBudgetWorkspace } from "@/server/budgets/service";
@@ -9,8 +10,8 @@ type BudgetsPageProps = {
   searchParams: Promise<{ error?: string }>;
 };
 
-function formatAmount(amountInCents: number) {
-  return `$${(amountInCents / 100).toFixed(2)}`;
+function formatAmount(amountInCents: number, currency?: string) {
+  return formatMoney(amountInCents, currency);
 }
 
 export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
@@ -88,7 +89,7 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
                       <div>
                         <h3 className="font-semibold">{budget.category.name}</h3>
                         <p className="mt-1 text-sm text-neutral-600">
-                          {formatAmount(budget.spentInCents)} spent of {formatAmount(budget.amountInCents)}
+                          {formatAmount(budget.spentInCents, user.profile?.currency)} spent of {formatAmount(budget.amountInCents, user.profile?.currency)}
                         </p>
                       </div>
                       <p className={exceeded ? "text-sm font-semibold text-red-700" : "text-sm font-semibold text-emerald-700"}>
@@ -99,7 +100,7 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
                       <div className={exceeded ? "h-full bg-red-600" : "h-full bg-emerald-600"} style={{ width: `${progressWidth}%` }} />
                     </div>
                     <p className={exceeded ? "mt-3 text-sm font-medium text-red-700" : "mt-3 text-sm text-neutral-600"}>
-                      {exceeded ? `${formatAmount(budget.spentInCents - budget.amountInCents)} over budget` : `${formatAmount(budget.amountInCents - budget.spentInCents)} remaining`}
+                      {exceeded ? `${formatAmount(budget.spentInCents - budget.amountInCents, user.profile?.currency)} over budget` : `${formatAmount(budget.amountInCents - budget.spentInCents, user.profile?.currency)} remaining`}
                     </p>
                   </article>
                 );

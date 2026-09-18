@@ -1,6 +1,7 @@
 import { logoutUser } from "@/server/auth/actions";
 import { requireUser } from "@/server/auth/session";
 import { getDashboardSummary } from "@/server/dashboard/service";
+import { formatMoney } from "@/lib/format";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -15,9 +16,8 @@ export default async function DashboardPage() {
     ? Math.round((summary.goals.currentInCents / summary.goals.targetInCents) * 100)
     : 0;
 
-  function formatAmount(amountInCents: number) {
-    return `$${(amountInCents / 100).toFixed(2)}`;
-  }
+  const formatAmount = (amountInCents: number) =>
+    formatMoney(amountInCents, user.profile?.currency);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8">
@@ -58,6 +58,12 @@ export default async function DashboardPage() {
           href="/goals"
         >
           Savings goals
+        </Link>
+        <Link
+          className="ml-3 mt-6 inline-block rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+          href="/settings"
+        >
+          Settings
         </Link>
       </section>
 
