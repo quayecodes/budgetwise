@@ -45,7 +45,7 @@ for managing personal finances.
 | Phase 5: Authentication & Authorization | Completed |
 | Phase 6: Core Feature Development | Completed |
 | Phase 7: UI/UX Refinement | Completed |
-| Phase 8: Testing, Security & Code Review | Upcoming |
+| Phase 8: Testing, Security & Code Review | In progress |
 
 ## Project Structure
 
@@ -92,6 +92,7 @@ budgetwise/
 npm run typecheck
 npm run lint
 npm run build
+npm test
 ```
 
 ## Documentation
@@ -103,3 +104,4 @@ npm run build
 - [Phase 5: Authentication and Authorization](docs/phase-5-authentication-and-authorization.md)
 - [Phase 6: Core Application Features](docs/phase-6-core-application-features.md)
 - [Phase 7: UI/UX Refinement](docs/phase-7-ui-ux-refinement.md)
+- [Phase 8: Testing, Security and Code Review](docs/phase-8-testing-security-and-code-review.md)
