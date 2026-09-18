@@ -10,9 +10,9 @@ const navigationItems = [
 
 export function DashboardNav() {
   return (
-    <nav aria-label="Primary navigation" className="flex flex-wrap gap-x-5 gap-y-2 border-b border-neutral-200 py-3 text-sm">
+    <nav aria-label="Primary navigation" className="flex flex-wrap gap-x-5 gap-y-2 border-b border-[var(--line)] py-4 text-sm">
       {navigationItems.map((item) => (
-        <Link className="font-medium text-neutral-600 hover:text-emerald-700" href={item.href} key={item.href}>
+        <Link className="font-medium text-[var(--ink-muted)] transition-colors hover:text-emerald-700" href={item.href} key={item.href}>
           {item.label}
         </Link>
       ))}

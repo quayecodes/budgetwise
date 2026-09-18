@@ -21,15 +21,15 @@ export default async function DashboardPage() {
     formatMoney(amountInCents, user.profile?.currency);
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl px-6 py-8">
-      <header className="flex flex-col gap-4 border-b border-neutral-200 pb-6 sm:flex-row sm:items-center sm:justify-between">
+    <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+      <header className="flex flex-col gap-4 border-b border-[var(--line)] pb-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm font-medium text-emerald-700">BudgetWise</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Dashboard</h1>
+          <p className="text-sm font-semibold tracking-[0.12em] text-emerald-700 uppercase">BudgetWise</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight">Dashboard</h1>
         </div>
         <form action={logoutUser}>
           <button
-            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold transition hover:border-neutral-500"
+            className="button-secondary"
             type="submit"
           >
             Sign out
@@ -38,32 +38,33 @@ export default async function DashboardPage() {
       </header>
       <DashboardNav />
 
-      <section className="py-8">
-        <h2 className="text-xl font-semibold">Hello, {user.name}</h2>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
-          Here is your current-month financial overview.
+      <section className="py-10">
+        <p className="text-sm font-semibold tracking-[0.12em] text-emerald-700 uppercase">Your money, in focus</p>
+        <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Hello, {user.name}</h2>
+        <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--ink-muted)]">
+          A calm view of your current-month income, spending, budgets, and savings progress.
         </p>
         <nav aria-label="Financial tools" className="mt-6 flex flex-wrap gap-3">
           <Link
-            className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+            className="button-primary"
             href="/transactions"
           >
             View transactions
           </Link>
           <Link
-            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+            className="button-secondary"
             href="/budgets"
           >
             Manage budgets
           </Link>
           <Link
-            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+            className="button-secondary"
             href="/goals"
           >
             Savings goals
           </Link>
           <Link
-            className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold hover:border-neutral-500"
+            className="button-secondary"
             href="/settings"
           >
             Settings
@@ -72,24 +73,24 @@ export default async function DashboardPage() {
       </section>
 
       <section aria-label="Current month summary" className="grid gap-4 sm:grid-cols-3">
-        <article className="rounded-md border border-neutral-200 p-5">
-          <p className="text-sm text-neutral-600">Income</p>
-          <p className="mt-2 text-2xl font-semibold text-emerald-700">{formatAmount(summary.incomeInCents)}</p>
+        <article className="surface p-5">
+          <p className="text-sm font-medium text-[var(--ink-muted)]">Income</p>
+          <p className="mt-3 text-3xl font-semibold text-emerald-700">{formatAmount(summary.incomeInCents)}</p>
         </article>
-        <article className="rounded-md border border-neutral-200 p-5">
-          <p className="text-sm text-neutral-600">Expenses</p>
-          <p className="mt-2 text-2xl font-semibold text-red-700">{formatAmount(summary.expensesInCents)}</p>
+        <article className="surface p-5">
+          <p className="text-sm font-medium text-[var(--ink-muted)]">Expenses</p>
+          <p className="mt-3 text-3xl font-semibold text-red-700">{formatAmount(summary.expensesInCents)}</p>
         </article>
-        <article className="rounded-md border border-neutral-200 p-5">
-          <p className="text-sm text-neutral-600">Balance</p>
-          <p className={summary.balanceInCents < 0 ? "mt-2 text-2xl font-semibold text-red-700" : "mt-2 text-2xl font-semibold"}>
+        <article className="surface p-5">
+          <p className="text-sm font-medium text-[var(--ink-muted)]">Balance</p>
+          <p className={summary.balanceInCents < 0 ? "mt-3 text-3xl font-semibold text-red-700" : "mt-3 text-3xl font-semibold text-[var(--foreground)]"}>
             {formatAmount(summary.balanceInCents)}
           </p>
         </article>
       </section>
 
       <section className="mt-8 grid gap-6 lg:grid-cols-2">
-        <article className="rounded-md border border-neutral-200 p-5">
+        <article className="surface p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-semibold">Budget progress</h2>
@@ -115,7 +116,7 @@ export default async function DashboardPage() {
           ) : null}
         </article>
 
-        <article className="rounded-md border border-neutral-200 p-5">
+        <article className="surface p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-semibold">Savings goals</h2>
