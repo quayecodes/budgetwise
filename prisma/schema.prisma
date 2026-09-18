@@ -1,5 +1,3 @@
-// Phase 4 foundation only. The detailed Phase 3 design will be implemented
-// through reviewed migrations before application features are added.
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,4 +5,171 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  ADMIN
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum BudgetPeriod {
+  WEEKLY
+  MONTHLY
+  TERM
+  YEARLY
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(STUDENT)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  profile             Profile?
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+  categories          Category[]
+  transactions        Transaction[]
+  budgets             Budget[]
+  savingsGoals        SavingsGoal[]
+  goalContributions   GoalContribution[]
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  currency  String   @default("USD")
+  timezone  String   @default("UTC")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Category {
+  id        String          @id @default(cuid())
+  userId    String
+  name      String
+  type      TransactionType
+  color     String
+  icon      String?
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  budgets      Budget[]
+
+  @@unique([userId, name, type])
+  @@index([userId, type])
+}
+
+model Transaction {
+  id            String          @id @default(cuid())
+  userId        String
+  categoryId    String
+  type          TransactionType
+  amountInCents Int
+  description   String
+  occurredAt    DateTime
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  @@index([userId, occurredAt])
+  @@index([categoryId])
+}
+
+model Budget {
+  id            String       @id @default(cuid())
+  userId        String
+  categoryId    String
+  period        BudgetPeriod
+  amountInCents Int
+  startsAt      DateTime
+  endsAt        DateTime
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  @@index([userId, startsAt, endsAt])
+  @@index([categoryId])
+}
+
+model SavingsGoal {
+  id                   String     @id @default(cuid())
+  userId               String
+  name                 String
+  targetAmountInCents  Int
+  currentAmountInCents Int        @default(0)
+  targetDate           DateTime?
+  status               GoalStatus @default(ACTIVE)
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contributions GoalContribution[]
+
+  @@index([userId, status])
+}
+
+model GoalContribution {
+  id            String   @id @default(cuid())
+  userId        String
+  savingsGoalId String
+  amountInCents Int
+  note          String?
+  contributedAt DateTime
+  createdAt     DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  savingsGoal SavingsGoal @relation(fields: [savingsGoalId], references: [id], onDelete: Cascade)
+
+  @@index([userId, contributedAt])
+  @@index([savingsGoalId])
 }

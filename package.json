@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint src next.config.ts eslint.config.mjs",
+    "lint:fix": "eslint src next.config.ts eslint.config.mjs --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "latest",
+    "@prisma/client": "^6.19.3",
+    "bcryptjs": "^3.0.3",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -21,16 +22,22 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "latest",
+    "@next/swc-win32-x64-msvc": "^16.3.5",
+    "@tailwindcss/oxide-win32-x64-msvc": "^4.3.3",
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "hermes-parser": "^0.25.1",
+    "language-subtag-registry": "^0.3.23",
+    "lightningcss-win32-x64-msvc": "^1.32.0",
     "prettier": "latest",
     "prettier-plugin-tailwindcss": "latest",
     "prisma": "^6.19.3",
     "tailwindcss": "latest",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "latest"
   }
 }
