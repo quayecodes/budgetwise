@@ -1,5 +1,6 @@
 import { requireUser } from "@/server/auth/session";
 import { DashboardShell } from "@/components/ui/dashboard-shell";
+import { EmptyState } from "@/components/ui/empty-state";
 import { formatMoney } from "@/lib/format";
 import { ensureDefaultCategories, listCategories } from "@/server/transactions/repository";
 import { saveMonthlyBudgetAction } from "@/server/budgets/actions";
@@ -61,9 +62,7 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
         <div>
           <h2 className="text-xl font-semibold">Progress</h2>
           {workspace.budgets.length === 0 ? (
-            <p className="mt-6 rounded-md border border-dashed border-neutral-300 px-4 py-8 text-sm text-neutral-600">
-              No budgets set for this month yet.
-            </p>
+            <EmptyState title="No budgets this month" description="Set a category limit to start monitoring your spending." />
           ) : (
             <div className="mt-6 space-y-4">
               {workspace.budgets.map((budget) => {

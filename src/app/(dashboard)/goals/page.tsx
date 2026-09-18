@@ -1,5 +1,6 @@
 import { requireUser } from "@/server/auth/session";
 import { DashboardShell } from "@/components/ui/dashboard-shell";
+import { EmptyState } from "@/components/ui/empty-state";
 import { formatMoney } from "@/lib/format";
 import { addContributionAction, createGoalAction } from "@/server/goals/actions";
 import { getGoals } from "@/server/goals/service";
@@ -52,9 +53,7 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
         <div>
           <h2 className="text-xl font-semibold">Your active goals</h2>
           {goals.length === 0 ? (
-            <p className="mt-6 rounded-md border border-dashed border-neutral-300 px-4 py-8 text-sm text-neutral-600">
-              No savings goals yet. Create one to start tracking progress.
-            </p>
+            <EmptyState title="No active goals" description="Create a savings goal to start tracking progress." />
           ) : (
             <div className="mt-6 space-y-4">
               {goals.map((goal) => {

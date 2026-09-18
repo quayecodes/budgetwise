@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { requireUser } from "@/server/auth/session";
 import { DashboardShell } from "@/components/ui/dashboard-shell";
+import { EmptyState } from "@/components/ui/empty-state";
 import { formatMoney } from "@/lib/format";
 import { ensureDefaultCategories } from "@/server/transactions/repository";
 import { getTransactionWorkspace } from "@/server/transactions/service";
@@ -142,11 +143,14 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
             </div>
           </form>
           {transactions.length === 0 ? (
-            <p className="mt-6 rounded-md border border-dashed border-neutral-300 px-4 py-8 text-sm text-neutral-600">
-              {Object.values(params).some(Boolean)
-                ? "No transactions match these filters."
-                : "No transactions yet. Add your first income or expense to get started."}
-            </p>
+            <EmptyState
+              title={Object.values(params).some(Boolean) ? "No matching transactions" : "No transactions yet"}
+              description={
+                Object.values(params).some(Boolean)
+                  ? "Try changing or clearing your filters."
+                  : "Add your first income or expense to start building your history."
+              }
+            />
           ) : (
             <div className="mt-6 divide-y divide-neutral-200 border-y border-neutral-200">
               {transactions.map((transaction) => (
