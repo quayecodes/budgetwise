@@ -21,7 +21,7 @@ for managing personal finances.
 - Budget planning
 - Financial summaries
 - Dashboard analytics
-- Secure user authentication (planned/current depending on implementation)
+- Secure user authentication and authorization
 
 ## Technology Stack
 
@@ -40,7 +40,8 @@ for managing personal finances.
 | Phase 2: System Architecture & Design | Completed |
 | Phase 3: Database Design | Completed |
 | Phase 4: Project Initialization | Completed |
-| Phase 5: Core Feature Development | Upcoming |
+| Phase 5: Authentication & Authorization | Completed |
+| Phase 6: Core Feature Development | Upcoming |
 
 ## Project Structure
 
