@@ -31,20 +31,20 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
               {error}
             </p>
           ) : null}
-          <form action={createGoalAction} className="mt-6 space-y-4">
+          <form action={createGoalAction} className="surface mt-6 space-y-4 p-5">
             <label className="block text-sm font-medium">
               Goal name
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="name" type="text" maxLength={100} required />
+              <input className="form-control mt-2" name="name" type="text" maxLength={100} required />
             </label>
             <label className="block text-sm font-medium">
               Target amount
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="targetAmount" type="text" inputMode="decimal" placeholder="0.00" required />
+              <input className="form-control mt-2" name="targetAmount" type="text" inputMode="decimal" placeholder="0.00" required />
             </label>
             <label className="block text-sm font-medium">
               Target date <span className="font-normal text-neutral-500">(optional)</span>
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="targetDate" type="date" />
+              <input className="form-control mt-2" name="targetDate" type="date" />
             </label>
-            <button className="w-full rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800" type="submit">
+            <button className="button-primary w-full" type="submit">
               Create goal
             </button>
           </form>
@@ -60,7 +60,7 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
                 const percentage = Math.round((goal.currentAmountInCents / goal.targetAmountInCents) * 100);
                 const complete = goal.currentAmountInCents >= goal.targetAmountInCents;
                 return (
-                  <article className="rounded-md border border-neutral-200 p-4" key={goal.id}>
+                  <article className="surface p-4" key={goal.id}>
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h3 className="font-semibold">{goal.name}</h3>
@@ -80,13 +80,13 @@ export default async function GoalsPage({ searchParams }: GoalsPageProps) {
                       <input name="goalId" type="hidden" value={goal.id} />
                       <label className="text-sm font-medium">
                         Add contribution
-                        <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="amount" type="text" inputMode="decimal" placeholder="0.00" required />
+                        <input className="form-control mt-2" name="amount" type="text" inputMode="decimal" placeholder="0.00" required />
                       </label>
                       <label className="text-sm font-medium">
                         Note
-                        <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="note" type="text" maxLength={200} />
+                        <input className="form-control mt-2" name="note" type="text" maxLength={200} />
                       </label>
-                      <button className="self-end rounded-md bg-neutral-900 px-4 py-2 text-sm font-semibold text-white hover:bg-neutral-700" type="submit">
+                      <button className="button-primary self-end" type="submit">
                         Add
                       </button>
                     </form>

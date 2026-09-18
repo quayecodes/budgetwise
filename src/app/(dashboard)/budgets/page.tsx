@@ -37,10 +37,10 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
               {error}
             </p>
           ) : null}
-          <form action={saveMonthlyBudgetAction} className="mt-6 space-y-4">
+          <form action={saveMonthlyBudgetAction} className="surface mt-6 space-y-4 p-5">
             <label className="block text-sm font-medium">
               Expense category
-              <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="categoryId" required>
+              <select className="form-control mt-2" name="categoryId" required>
                 <option value="">Select a category</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -51,9 +51,9 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
             </label>
             <label className="block text-sm font-medium">
               Monthly limit
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="amount" type="text" inputMode="decimal" placeholder="0.00" required />
+              <input className="form-control mt-2" name="amount" type="text" inputMode="decimal" placeholder="0.00" required />
             </label>
-            <button className="w-full rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800" type="submit">
+            <button className="button-primary w-full" type="submit">
               Save budget
             </button>
           </form>
@@ -71,7 +71,7 @@ export default async function BudgetsPage({ searchParams }: BudgetsPageProps) {
                 const exceeded = budget.spentInCents > budget.amountInCents;
 
                 return (
-                  <article className="rounded-md border border-neutral-200 p-4" key={budget.id}>
+                  <article className="surface p-4" key={budget.id}>
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h3 className="font-semibold">{budget.category.name}</h3>

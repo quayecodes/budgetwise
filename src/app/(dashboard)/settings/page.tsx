@@ -45,7 +45,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
         <form action={updateProfilePreferencesAction} className="max-w-md space-y-5">
           <label className="block text-sm font-medium">
             Currency
-            <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={profile.currency} name="currency">
+            <select className="form-control mt-2" defaultValue={profile.currency} name="currency">
               {supportedCurrencies.map((currency) => (
                 <option key={currency} value={currency}>
                   {currency === "GHS" ? "GHS - Ghanaian cedi" : currency}
@@ -55,7 +55,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
           </label>
           <label className="block text-sm font-medium">
             Timezone
-            <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={profile.timezone} name="timezone">
+            <select className="form-control mt-2" defaultValue={profile.timezone} name="timezone">
               {timezoneOptions.map((timezone) => (
                 <option key={timezone} value={timezone}>
                   {timezone}
@@ -63,7 +63,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
               ))}
             </select>
           </label>
-          <button className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800" type="submit">
+          <button className="button-primary" type="submit">
             Save preferences
           </button>
         </form>

@@ -43,21 +43,21 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
               {error}
             </p>
           ) : null}
-          <form action={createTransactionAction} className="mt-6 space-y-4">
+          <form action={createTransactionAction} className="surface mt-6 space-y-4 p-5">
             <label className="block text-sm font-medium">
               Type
-              <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="type" defaultValue="EXPENSE">
+              <select className="form-control mt-2" name="type" defaultValue="EXPENSE">
                 <option value="EXPENSE">Expense</option>
                 <option value="INCOME">Income</option>
               </select>
             </label>
             <label className="block text-sm font-medium">
               Amount
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="amount" type="text" inputMode="decimal" placeholder="0.00" required />
+              <input className="form-control mt-2" name="amount" type="text" inputMode="decimal" placeholder="0.00" required />
             </label>
             <label className="block text-sm font-medium">
               Category
-              <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="categoryId" required>
+              <select className="form-control mt-2" name="categoryId" required>
                 <option value="">Select a category</option>
                 <optgroup label="Expenses">
                   {categories
@@ -81,13 +81,13 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
             </label>
             <label className="block text-sm font-medium">
               Date
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="occurredAt" type="date" required />
+              <input className="form-control mt-2" name="occurredAt" type="date" required />
             </label>
             <label className="block text-sm font-medium">
               Note
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" name="description" type="text" maxLength={200} />
+              <input className="form-control mt-2" name="description" type="text" maxLength={200} />
             </label>
-            <button className="w-full rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800" type="submit">
+            <button className="button-primary w-full" type="submit">
               Add transaction
             </button>
           </form>
@@ -95,11 +95,11 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
 
         <div>
           <h2 className="text-xl font-semibold">History</h2>
-          <form className="mt-6 grid gap-3 rounded-md border border-neutral-200 p-4 sm:grid-cols-2" method="get">
+          <form className="surface mt-6 grid gap-3 p-4 sm:grid-cols-2" method="get">
             <label className="text-sm font-medium">
               Search
               <input
-                className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal"
+                className="form-control mt-2"
                 defaultValue={params.query}
                 name="query"
                 placeholder="Description or category"
@@ -108,7 +108,7 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
             </label>
             <label className="text-sm font-medium">
               Type
-              <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={params.type ?? ""} name="type">
+              <select className="form-control mt-2" defaultValue={params.type ?? ""} name="type">
                 <option value="">All types</option>
                 <option value="EXPENSE">Expenses</option>
                 <option value="INCOME">Income</option>
@@ -116,7 +116,7 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
             </label>
             <label className="text-sm font-medium">
               Category
-              <select className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={params.categoryId ?? ""} name="categoryId">
+              <select className="form-control mt-2" defaultValue={params.categoryId ?? ""} name="categoryId">
                 <option value="">All categories</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -127,14 +127,14 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
             </label>
             <label className="text-sm font-medium">
               From
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={params.from} name="from" type="date" />
+              <input className="form-control mt-2" defaultValue={params.from} name="from" type="date" />
             </label>
             <label className="text-sm font-medium">
               To
-              <input className="mt-2 w-full rounded-md border border-neutral-300 px-3 py-2 font-normal" defaultValue={params.to} name="to" type="date" />
+              <input className="form-control mt-2" defaultValue={params.to} name="to" type="date" />
             </label>
             <div className="flex items-end gap-3">
-              <button className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-semibold text-white hover:bg-neutral-700" type="submit">
+              <button className="button-primary" type="submit">
                 Apply filters
               </button>
               <Link className="text-sm font-medium text-emerald-700" href="/transactions">
@@ -165,12 +165,12 @@ export default async function TransactionsPage({ searchParams }: TransactionsPag
                     {formatAmount(transaction.amountInCents, transaction.type, user.profile?.currency)}
                   </p>
                   <div className="flex shrink-0 items-center gap-3 text-sm">
-                    <Link className="font-medium text-emerald-700" href={`/transactions/${transaction.id}/edit`}>
+                    <Link className="font-medium text-emerald-700 hover:text-emerald-800" href={`/transactions/${transaction.id}/edit`}>
                       Edit
                     </Link>
                     <form action={deleteTransactionAction}>
                       <input name="transactionId" type="hidden" value={transaction.id} />
-                      <button className="font-medium text-red-700" type="submit">
+                      <button className="button-danger" type="submit">
                         Delete
                       </button>
                     </form>
