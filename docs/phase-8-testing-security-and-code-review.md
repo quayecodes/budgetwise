@@ -10,7 +10,7 @@ Establish automated coverage for high-risk business rules, verify the applicatio
 
 Added Vitest with a Node test environment and the project `@/*` path alias.
 
-The first test suite covers:
+The test suite covers:
 
 - Integer-cent money conversion.
 - Rejection of zero, negative, and over-precision transaction amounts.
@@ -20,11 +20,13 @@ The first test suite covers:
 - Savings-goal names, target dates, and contribution amounts.
 - Supported currencies, including Ghanaian cedi (`GHS`).
 - IANA timezone validation.
+- Registration confirmation and password mismatch rules.
+- Authentication credential validation for login and malformed input.
 
 Current result:
 
-- 3 test files passed.
-- 8 tests passed.
+- 4 test files passed.
+- 10 tests passed.
 
 ### Existing verification
 

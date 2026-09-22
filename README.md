@@ -45,7 +45,7 @@ for managing personal finances.
 | Phase 5: Authentication & Authorization | Completed |
 | Phase 6: Core Feature Development | Completed |
 | Phase 7: UI/UX Refinement | Completed |
-| Phase 8: Testing, Security & Code Review | In progress |
+| Phase 8: Testing, Security & Code Review | Completed |
 
 ## Project Structure
 
