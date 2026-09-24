@@ -1,8 +1,9 @@
-import { createHash, randomBytes } from "node:crypto";
+import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { serverEnv } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 
 const sessionCookieName = "budgetwise_session";
@@ -10,6 +11,45 @@ const sessionDurationMs = 1000 * 60 * 60 * 24 * 30;
 
 function hashSessionToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
+}
+
+function signSessionToken(token: string) {
+  return createHmac("sha256", serverEnv().AUTH_SECRET).update(token).digest("hex");
+}
+
+function createSessionCookieValue(token: string) {
+  return `${token}.${signSessionToken(token)}`;
+}
+
+function readSessionCookieValue(value: string | undefined) {
+  if (!value) {
+    return null;
+  }
+
+  const cookieParts = value.split(".");
+
+  if (cookieParts.length !== 2) {
+    return null;
+  }
+
+  const [token, signature] = cookieParts;
+
+  if (!token || !signature) {
+    return null;
+  }
+
+  const expectedSignature = signSessionToken(token);
+  const signatureBuffer = Buffer.from(signature, "hex");
+  const expectedSignatureBuffer = Buffer.from(expectedSignature, "hex");
+
+  if (
+    signatureBuffer.length !== expectedSignatureBuffer.length ||
+    !timingSafeEqual(signatureBuffer, expectedSignatureBuffer)
+  ) {
+    return null;
+  }
+
+  return token;
 }
 
 export async function createUserSession(userId: string) {
@@ -27,7 +67,7 @@ export async function createUserSession(userId: string) {
 
   const cookieStore = await cookies();
 
-  cookieStore.set(sessionCookieName, token, {
+  cookieStore.set(sessionCookieName, createSessionCookieValue(token), {
     expires: expiresAt,
     httpOnly: true,
     path: "/",
@@ -38,7 +78,7 @@ export async function createUserSession(userId: string) {
 
 export const getCurrentUser = cache(async () => {
   const cookieStore = await cookies();
-  const token = cookieStore.get(sessionCookieName)?.value;
+  const token = readSessionCookieValue(cookieStore.get(sessionCookieName)?.value);
 
   if (!token) {
     return null;
@@ -86,7 +126,7 @@ export async function requireUser() {
 
 export async function destroyCurrentSession() {
   const cookieStore = await cookies();
-  const token = cookieStore.get(sessionCookieName)?.value;
+  const token = readSessionCookieValue(cookieStore.get(sessionCookieName)?.value);
 
   if (token) {
     await prisma.session.deleteMany({
