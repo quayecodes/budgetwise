@@ -10,6 +10,8 @@
     "lint:fix": "eslint src next.config.ts eslint.config.mjs --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "db:validate": "prisma validate",
+    "db:migrate:deploy": "prisma migrate deploy",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
