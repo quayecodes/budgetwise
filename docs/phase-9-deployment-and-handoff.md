@@ -215,3 +215,67 @@ Before moving to Phase 9.4, confirm:
 The repository is prepared for Supabase-backed production migration, but no live
 database changes were executed because creating the Supabase project and handling
 the production connection string require manual dashboard interaction.
+
+## Phase 9.4 - Prisma Production Migration
+
+### Objective
+
+Apply the committed Prisma migration history to the Supabase production
+PostgreSQL database using `prisma migrate deploy`.
+
+### Current Status
+
+The migration was not executed during this pass because the local
+`DATABASE_URL` does not point to a Supabase database and does not include a
+Supabase-style SSL mode. Running `prisma migrate deploy` against that URL could
+target the wrong database, so the production migration is intentionally paused
+until the real Supabase connection string is available in a secure environment.
+
+### Migration Commands
+
+Use these commands only after the Supabase `DATABASE_URL` is available in the
+current shell or deployment environment:
+
+```bash
+npm run db:migrate:status
+npm run db:migrate:deploy
+npm run db:migrate:status
+```
+
+The first status check confirms which migrations Prisma thinks are pending. The
+deploy command applies committed migrations only; it must not create a new
+migration file. The final status check confirms the production database is up to
+date.
+
+### Credential-Safe PowerShell Flow
+
+If running the migration from a local PowerShell terminal, set the production
+database URL only for that terminal session:
+
+```powershell
+$env:DATABASE_URL = "paste-the-supabase-postgresql-url-here"
+npm run db:migrate:status
+npm run db:migrate:deploy
+npm run db:migrate:status
+Remove-Item Env:DATABASE_URL
+```
+
+Do not save the production `DATABASE_URL` into `.env`, `.env.local`,
+documentation, screenshots, commits, or chat.
+
+### Expected Migration Result
+
+For a fresh Supabase database, Prisma should apply:
+
+```text
+20260918121116_initial_auth_and_finance_schema
+```
+
+After deployment, `npm run db:migrate:status` should report that the database
+schema is up to date.
+
+### Manual Gate
+
+Before this phase can be completed, the Supabase project must exist and the
+production `DATABASE_URL` must be available privately to the person running the
+migration.
