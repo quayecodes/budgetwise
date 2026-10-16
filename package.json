@@ -28,7 +28,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "latest",
     "@jridgewell/trace-mapping": "^0.3.31",
-    "@next/swc-win32-x64-msvc": "^16.3.5",
     "@tailwindcss/oxide-win32-x64-msvc": "^4.3.3",
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
